@@ -1,0 +1,30 @@
+{
+  "name": "doc_twitter_bot",
+  "version": "1.0.0",
+  "description": "Bot that tweets mixed and matched idioms, based on the 'Doc' character from the film, \"Boondock Saints\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brooksbecton/DocTwitterBot.git"
+  },
+  "keywords": [
+    "Twitter",
+    "Bot",
+    "Node",
+    "JavaScript",
+    "twit"
+  ],
+  "author": "Brooks Becton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brooksbecton/DocTwitterBot/issues"
+  },
+  "homepage": "https://github.com/brooksbecton/DocTwitterBot#readme",
+  "devDependencies": {
+    "dotenv": "^4.0.0",
+    "twit": "^2.2.9"
+  }
+}
