@@ -32,7 +32,16 @@ class DocBot {
    * @param {string} pivot 
    * @return {string}
    */
-  getMatchingProverb(pivot) {}
+  getMatchingProverb(pivot) {
+    const allProverbs = this.proverbs.get();
+    let proverb;
+    allProverbs.map(current => {
+      if (current.search(" " + pivot + " ") != -1) {
+        proverb = current;
+      }
+    });
+    return proverb;
+  }
 
   /**
    * Takes in a sentence and pulls out 
@@ -57,7 +66,10 @@ class DocBot {
   }
 
   getRandomProverb() {
-    return "asdf";
+    //Array holding all proverb strings
+    const allProverbs = this.proverbs.get();
+    const randomInt = Math.floor(Math.random() * allProverbs.length);
+    return allProverbs[randomInt];
   }
 
   putTweet() {

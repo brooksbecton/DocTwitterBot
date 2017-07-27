@@ -10,7 +10,7 @@ module.exports = class Proverbs {
    * Gets all availible proverbs
    * @return {Array}
    */
-  getProverbs() {
+  get() {
     return this.proverbs;
   }
 

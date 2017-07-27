@@ -1,12 +1,25 @@
 var assert = require("chai").assert;
 
-require("dotenv").config({ path: "./../" });
-
 const DocBot = require("./");
 
 describe("DocBot", function() {
   let docBot;
   beforeEach(() => (docBot = new DocBot()));
+
+  describe("getMatchingProverb()", function() {
+    it(" finds proverb with same conjuction", function() {
+      assert.notEqual(docBot.getMatchingProverb("and").search(" and "), -1);
+      assert.notEqual(
+        docBot.getMatchingProverb("because").search(" because "),
+        -1
+      );
+      assert.notEqual(docBot.getMatchingProverb("but").search(" but "), -1);
+      assert.notEqual(docBot.getMatchingProverb("for").search(" for "), -1);
+      assert.notEqual(docBot.getMatchingProverb("if").search(" if "), -1);
+      assert.notEqual(docBot.getMatchingProverb("or").search(" or "), -1);
+      assert.notEqual(docBot.getMatchingProverb("when").search(" when "), -1);
+    });
+  });
 
   describe("getPivot()", function() {
     describe("conjunctions", function() {
@@ -27,7 +40,6 @@ describe("DocBot", function() {
 
   describe("getRandomProverb()", function() {
     it(" returns a string", function() {
-      const singleConjuction = "Anger AND hate hinder good counsel.";
       assert.typeOf(docBot.getRandomProverb(), "string");
     });
   });
