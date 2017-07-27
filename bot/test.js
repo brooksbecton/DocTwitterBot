@@ -7,8 +7,20 @@ describe("DocBot", function() {
   beforeEach(() => (docBot = new DocBot()));
 
   describe("combineProverbs()", function() {
+    const firstProverb = "Spare the rod and spoil the child.";
+    const secondProverb = "Adversity and loss make a man wise.";
+    const pivot = "and";
+    it(" combines two provides on conjunction", function() {
+      assert.equal(
+        docBot.combineProverbs(firstProverb, secondProverb, pivot),
+        "Spare the rod and loss make a man wise."
+      );
+    });
     it(" returns a string", function() {
-      assert.typeOf(docBot.combineProverbs(), "string");
+      assert.typeOf(
+        docBot.combineProverbs(firstProverb, secondProverb, pivot),
+        "string"
+      );
     });
   });
 

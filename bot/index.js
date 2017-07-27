@@ -27,7 +27,17 @@ class DocBot {
  * @return {string}
  */
   combineProverbs(proverb, matchingProverb, pivot) {
-    return " ";
+    let combinedProverb = "";
+    const pivotIndex = proverb.search(pivot);
+    combinedProverb += proverb.slice(0, pivotIndex + pivot.length);
+
+    const matchPivotIndex = matchingProverb.search(pivot);
+    combinedProverb += matchingProverb.slice(
+      matchPivotIndex + pivot.length,
+      matchingProverb.length
+    );
+
+    return combinedProverb;
   }
 
   /**
