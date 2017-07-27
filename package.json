@@ -10,7 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/brooksbecton/DocTwitterBot.git"
   },
-  "keywords": ["Twitter", "Bot", "Node", "JavaScript", "twit"],
+  "keywords": [
+    "Twitter",
+    "Bot",
+    "Node",
+    "JavaScript",
+    "twit"
+  ],
   "author": "Brooks Becton",
   "license": "MIT",
   "bugs": {
@@ -22,6 +28,7 @@
     "twit": "^2.2.9"
   },
   "dependencies": {
+    "chai": "^4.1.0",
     "dotenv": "^4.0.0",
     "firebase": "^4.1.5",
     "mocha": "^3.4.2"

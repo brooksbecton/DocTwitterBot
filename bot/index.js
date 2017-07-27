@@ -1,11 +1,9 @@
-const config = require("./../config.js");
+const twitter = require("./../twitter.js");
 const proverbs = require("./../proverbs/");
-const twit = require("twit");
 
 class DocBot {
   constructor() {
     this.proverbs = new proverbs();
-    this.twitter = new twit(config);
   }
 
   /**
@@ -13,8 +11,8 @@ class DocBot {
    * @return {string}
    */
   generateProverb() {
-    const proverb = pickRandomProverb();
-    const pivot = pickPivot(proverb);
+    const proverb = getRandomProverb();
+    const pivot = getPivot(proverb);
     const matchingProverb = getMatchingProverb(pivot);
     const docProverb = combineProverbs(proverb, matchingProverb, pivot);
 
@@ -42,7 +40,25 @@ class DocBot {
    * @param {string} proverb 
    * @return {string}
    */
-  getPivot(proverb) {}
+  getPivot(proverb) {
+    proverb = proverb.toLocaleLowerCase();
+    const conjunctions = ["and", "because", "but", "for", "if", "or", "when"];
+    let conjunction = "";
+
+    conjunctions.map((current, i) => {
+      const targetIndex = proverb.search(" " + current + " ");
+      if (targetIndex != -1) {
+        //Assigning lower case version
+        conjunction = current.toLocaleLowerCase();
+      }
+    });
+
+    return conjunction;
+  }
+
+  getRandomProverb() {
+    return "asdf";
+  }
 
   putTweet() {
     twitter.post("statuses/update", { status: "hello world!" }, function(
