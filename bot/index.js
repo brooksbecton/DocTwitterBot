@@ -18,6 +18,7 @@ class DocBot {
 
     return docProverb;
   }
+
   /**
  * Takes in two proverbs combines them on the pivot
  * @param {string} matchingProverb 
@@ -25,7 +26,9 @@ class DocBot {
  * @param {string} proverb 
  * @return {string}
  */
-  combineProverbs(proverb, matchingProverb, pivot) {}
+  combineProverbs(proverb, matchingProverb, pivot) {
+    return " ";
+  }
 
   /**
    * Takes a pivot and finds another proverb with a similar pivot
@@ -65,6 +68,10 @@ class DocBot {
     return conjunction;
   }
 
+  /**
+   * Returns random proverb from all proverbs
+   * @return {string}
+   */
   getRandomProverb() {
     //Array holding all proverb strings
     const allProverbs = this.proverbs.get();

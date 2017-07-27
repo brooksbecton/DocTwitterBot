@@ -6,6 +6,12 @@ describe("DocBot", function() {
   let docBot;
   beforeEach(() => (docBot = new DocBot()));
 
+  describe("combineProverbs()", function() {
+    it(" returns a string", function() {
+      assert.typeOf(docBot.combineProverbs(), "string");
+    });
+  });
+
   describe("getMatchingProverb()", function() {
     it(" finds proverb with same conjuction", function() {
       assert.notEqual(docBot.getMatchingProverb("and").search(" and "), -1);
