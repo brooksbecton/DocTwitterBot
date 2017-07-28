@@ -11,11 +11,17 @@ class DocBot {
    * @return {string}
    */
   generateProverb() {
-    const proverb = getRandomProverb();
-    const pivot = getPivot(proverb);
-    const matchingProverb = getMatchingProverb(pivot);
-    const docProverb = combineProverbs(proverb, matchingProverb, pivot);
+    const proverb = this.getRandomProverb();
+    const pivot = this.getPivot(proverb);
+    let docProverb;
 
+    const matchingProverb = this.getMatchingProverb(pivot);
+    if (!matchingProverb) {
+      //Re-picking proverb
+      docProverb = this.generateProverb();
+    } else {
+      docProverb = this.combineProverbs(proverb, matchingProverb, pivot);
+    }
     return docProverb;
   }
 
@@ -28,6 +34,7 @@ class DocBot {
  */
   combineProverbs(proverb, matchingProverb, pivot) {
     let combinedProverb = "";
+
     const pivotIndex = proverb.search(pivot);
     combinedProverb += proverb.slice(0, pivotIndex + pivot.length);
 
@@ -46,7 +53,7 @@ class DocBot {
    * @return {string}
    */
   getMatchingProverb(pivot) {
-    const allProverbs = this.proverbs.get();
+    const allProverbs = this.shuffle(this.proverbs.get());
     let proverb;
     allProverbs.map(current => {
       if (current.search(" " + pivot + " ") != -1) {
@@ -86,7 +93,20 @@ class DocBot {
     //Array holding all proverb strings
     const allProverbs = this.proverbs.get();
     const randomInt = Math.floor(Math.random() * allProverbs.length);
+
     return allProverbs[randomInt];
+  }
+
+  /**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items The array containing the items.
+ */
+  shuffle(a) {
+    for (let i = a.length; i; i--) {
+      let j = Math.floor(Math.random() * i);
+      [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+    return a;
   }
 
   putTweet() {
