@@ -19,7 +19,7 @@ class DocBot {
     let docProverb;
 
     const matchingProverb = this.getMatchingProverb(pivot);
-    if (!matchingProverb) {
+    if (!matchingProverb || matchingProverb === proverb) {
       //Re-picking proverb
       docProverb = this.generateProverb();
     } else {

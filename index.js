@@ -2,5 +2,7 @@ const DocBot = require("./bot");
 
 const docBot = new DocBot();
 
-const docProverb = docBot.generateProverb();
-console.log("docProverb", docProverb);
+for (var i = 0; i < 100; i++) {
+  const docProverb = docBot.generateProverb();
+  console.log(docProverb);
+}
