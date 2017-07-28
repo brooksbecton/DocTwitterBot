@@ -1,5 +1,8 @@
-const twitter = require("./../twitter.js");
+const moment = require("moment");
+
+const firebase = require("./../firebase").firebase;
 const proverbs = require("./../proverbs/");
+const twitter = require("./../twitter");
 
 class DocBot {
   constructor() {
@@ -43,6 +46,8 @@ class DocBot {
       matchPivotIndex + pivot.length,
       matchingProverb.length
     );
+
+    this.saveProverb(combinedProverb, matchingProverb, pivot, proverb);
 
     return combinedProverb;
   }
@@ -95,6 +100,28 @@ class DocBot {
     const randomInt = Math.floor(Math.random() * allProverbs.length);
 
     return allProverbs[randomInt];
+  }
+
+  /**
+ * Records meta data about the proverb created
+ * @param {string} matchingProverb 
+ * @param {string} pivot 
+ * @param {string} proverb 
+ */
+  saveProverb(combinedProverb, matchingProverb, pivot, proverb) {
+    firebase
+      .database()
+      .ref("doc/proverbs/")
+      .push({
+        combinedProverb,
+        matchingProverb,
+        pivot,
+        proverb,
+        date: moment().format()
+      })
+      .then(() => {
+        process.exit();
+      });
   }
 
   /**
