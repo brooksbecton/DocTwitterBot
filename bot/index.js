@@ -129,7 +129,7 @@ class DocBot {
         pivot,
         proverb,
         tweetId,
-        date: moment().format()
+        date: moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
       })
       .then(() => process.exit());
     return pushId;
