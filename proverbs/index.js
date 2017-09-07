@@ -16,11 +16,18 @@ module.exports = class Proverbs {
 
   initProverbs() {
     proverbs.map(proverb => {
-      writeProverb(proverb);
+      putProverb(proverb);
     });
   }
 
+  /**
+   * Adds proverb text to db
+   * @param {String} text
+   */
   putProverb(text) {
-    firebase.database().ref("proverbs/").push(text);
+    firebase
+      .database()
+      .ref("proverbs/")
+      .push(text);
   }
 };

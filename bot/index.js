@@ -24,8 +24,10 @@ class DocBot {
       docProverb = this.generateProverb();
     } else {
       docProverb = this.combineProverbs(proverb, matchingProverb, pivot);
+      this.putTweet(docProverb, tweetId => {
+        this.saveProverb(docProverb, matchingProverb, pivot, proverb, tweetId);
+      });
     }
-    return docProverb;
   }
 
   /**
@@ -46,8 +48,6 @@ class DocBot {
       matchPivotIndex + pivot.length,
       matchingProverb.length
     );
-
-    this.saveProverb(combinedProverb, matchingProverb, pivot, proverb);
 
     return combinedProverb;
   }
@@ -102,26 +102,37 @@ class DocBot {
     return allProverbs[randomInt];
   }
 
+  //Post the
+  putTweet(tweetText, cb) {
+    twitter.post("statuses/update", { status: tweetText }, function(
+      err,
+      data,
+      response
+    ) {
+      cb(data.id);
+    });
+  }
+
   /**
  * Records meta data about the proverb created
  * @param {string} matchingProverb 
  * @param {string} pivot 
  * @param {string} proverb 
  */
-  saveProverb(combinedProverb, matchingProverb, pivot, proverb) {
-    firebase
+  saveProverb(combinedProverb, matchingProverb, pivot, proverb, tweetId) {
+    const pushId = firebase
       .database()
-      .ref("doc/proverbs/")
+      .ref("doc/")
       .push({
         combinedProverb,
         matchingProverb,
         pivot,
         proverb,
+        tweetId,
         date: moment().format()
       })
-      .then(() => {
-        process.exit();
-      });
+      .then(() => process.exit());
+    return pushId;
   }
 
   /**
@@ -134,16 +145,6 @@ class DocBot {
       [a[i - 1], a[j]] = [a[j], a[i - 1]];
     }
     return a;
-  }
-
-  putTweet() {
-    twitter.post("statuses/update", { status: "hello world!" }, function(
-      err,
-      data,
-      response
-    ) {
-      console.log(data);
-    });
   }
 }
 
